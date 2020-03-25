@@ -1,0 +1,26 @@
+$date
+	Tue Mar 24 21:08:18 2020
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module test_Instruction_memory $end
+$var wire 32 ! out [31:0] $end
+$var reg 32 " pc [31:0] $end
+$scope module test $end
+$var wire 32 # pc [31:0] $end
+$var reg 32 $ out [31:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b100 $
+b0 #
+b0 "
+b100 !
+$end
+#10

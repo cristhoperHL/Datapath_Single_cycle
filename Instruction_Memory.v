@@ -1,7 +1,6 @@
-module Instruction_Memory(pc,out);
-input [31:0] pc;
-output reg [31:0] out;
-reg [7:0] instrucciones [0:32];
+module Instruction_Memory(input [31:0] pc,output reg [31:0] out);
+reg [7:0] instrucciones [0:31];
+
 
 initial begin 
     $readmemb("instructions.txt",instrucciones);
