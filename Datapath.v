@@ -16,11 +16,18 @@ wire [31:0] instruction;
 
 
 
+//FETCH
 Program_Counter PC(.clk(clk),.reset(reset),.d(d),.q(pc));
-
 Instruction_Memory IM(.pc(pc),.out(instruction));
-
 Add_pc APC(.pc(pc),.pc_end(d));
+
+//DECODE 
+
+
+
+
+
+
 
 always
 begin
@@ -39,7 +46,5 @@ initial begin
 	#13;$finish;
 
 end
-
-
 
 endmodule
