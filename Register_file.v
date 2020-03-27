@@ -9,7 +9,7 @@ input [31:0] write_data;
 //el resultado que obtienes del alu.
 //input [31:0] write_data;
 input RegWrite;
-output reg [31:0] read_data1,read_data2;
+output [31:0] read_data1,read_data2;
 
 //aqui se guardara el contenido donde se va a guardar
 input [4:0] write_reg;
@@ -30,11 +30,8 @@ begin
 end
 
 
-always@(*)//ademas de eso agregar el posedge a clk
-begin
-    read_data1 <= variables[read_reg1];
-    read_data2 <= variables[read_reg2];
-end
+assign read_data1 = variables[read_reg1];
+assign read_data2 = variables[read_reg2];
 
 
 

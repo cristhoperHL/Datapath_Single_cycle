@@ -38,7 +38,7 @@ wire [31:0] ALU_result;
 Program_Counter PC(.clk(clk),.reset(reset),.d(d),.q(pc));
 Instruction_Memory IM(.pc(pc),.out(instruction));
 Add_pc APC(.pc(pc),.pc_end(d));
-
+	
 
 //DECODE 
 Control_Unit CU(.instruction(instruction[31:26]),.RegDst(RegDst),.jump(jump),
@@ -46,7 +46,7 @@ Control_Unit CU(.instruction(instruction[31:26]),.RegDst(RegDst),.jump(jump),
 .MemWrite(MemWrite),.ALUSrc(ALUSrc),.RegWrite(RegWrite));
 
 
-regdst_mux_2_1 rgm2_1(.a(instruction[25:21]),.b(instruction[20:16]),.sel(RegDst),
+regdst_mux_2_1 rgm2_1(.a(instruction[20:16]),.b(instruction[15:11]),.sel(RegDst),
 .y(write_reg));
 
 //EL RF falta mejorar 
@@ -79,7 +79,7 @@ end
 initial begin
 	$dumpfile("func.vcd");
 	$dumpvars;
-	$monitor(" pc = %b,%b,%d,%d,a=%b,b=%b,op=%d,result=%b",pc,instruction,instruction[25:21],instruction[21:16],read_data1,read_data2,alu_control_out,ALU_result);
+	$monitor(" pc = %b,%b,%d,%d,a=%b,b=%b,op=%d,result=%b,%b,%d",pc,instruction,instruction[25:21],instruction[21:16],read_data1,read_data2,alu_control_out,ALU_result,write_reg,RegDst);
 	reset<=1;
     clk<=1;
     #1;
