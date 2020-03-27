@@ -7,11 +7,11 @@ output reg [4:0] y;
 always@(a,b,sel)
 begin 
 
-if (sel == 1'b0) 
+if (sel == 1'b1) 
     begin
         y=a;
     end
-else if(sel == 1'b1)
+else if(sel == 1'b0)
     begin
         y=b;
     end

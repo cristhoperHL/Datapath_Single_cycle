@@ -1,5 +1,5 @@
 $date
-	Thu Mar 26 20:25:30 2020
+	Thu Mar 26 22:23:42 2020
 $end
 $version
 	Icarus Verilog
@@ -64,35 +64,37 @@ $var wire 1 2 clk $end
 $var wire 5 ? read_reg1 [4:0] $end
 $var wire 5 @ read_reg2 [4:0] $end
 $var wire 5 A write_reg [4:0] $end
-$var reg 32 B read_data1 [31:0] $end
-$var reg 32 C read_data2 [31:0] $end
+$var wire 32 B write_data [31:0] $end
+$var reg 32 C read_data1 [31:0] $end
+$var reg 32 D read_data2 [31:0] $end
 $upscope $end
 $scope module alu $end
-$var wire 6 D alu_control_out [5:0] $end
-$var wire 32 E read_data1 [31:0] $end
-$var wire 32 F read_data2 [31:0] $end
-$var reg 32 G ALU_result [31:0] $end
+$var wire 6 E alu_control_out [5:0] $end
+$var wire 32 F read_data1 [31:0] $end
+$var wire 32 G read_data2 [31:0] $end
+$var reg 32 H ALU_result [31:0] $end
 $upscope $end
 $scope module rgm2_1 $end
-$var wire 5 H a [4:0] $end
-$var wire 5 I b [4:0] $end
+$var wire 5 I a [4:0] $end
+$var wire 5 J b [4:0] $end
 $var wire 1 * sel $end
-$var reg 5 J y [4:0] $end
+$var reg 5 K y [4:0] $end
 $upscope $end
 $upscope $end
 $enddefinitions $end
 #0
 $dumpvars
-b0 J
-b1 I
-b0 H
-b11 G
-b10 F
-b1 E
-b0 D
-b10 C
-b1 B
-b0 A
+b1 K
+b1 J
+b0 I
+b11 H
+b10 G
+b1 F
+b0 E
+b10 D
+b1 C
+b11 B
+b1 A
 b1 @
 b0 ?
 b0 >
@@ -116,7 +118,7 @@ b11 /
 0,
 0+
 0*
-0)
+1)
 b0 (
 b100 '
 b10000000000000000 &
@@ -124,33 +126,29 @@ b10000000000000000 &
 b0 $
 b1 #
 b10 "
-b0 !
+b1 !
 $end
 #1
 03
 02
 #2
-b100 "
-b100 C
-b100 F
-b11 #
-b11 B
-b11 E
-b11111111111111111111111111111111 /
-b11111111111111111111111111111111 G
 b1 (
 b1 6
-b1 D
-b10 !
-b10 A
-b10 J
+b1 E
+b11 !
+b11 A
+b11 K
 b1 4
 b11 @
-b10 ?
-b11 I
-b10 H
-b10000110000000000000001 &
-b10000110000000000000001 <
+b11 J
+b11111111111111111111111111111101 /
+b11111111111111111111111111111101 B
+b11111111111111111111111111111101 H
+b110000000000000001 &
+b110000000000000001 <
+b100 "
+b100 D
+b100 G
 b1000 '
 b1000 8
 b1000 =
@@ -162,27 +160,28 @@ b100 >
 #3
 02
 #4
-b110 "
-b110 C
-b110 F
 b101 #
-b101 B
-b101 E
-b100 /
-b100 G
+b101 C
+b101 F
 b10 (
 b10 6
-b10 D
-b100 !
-b100 A
-b100 J
+b10 E
+b101 !
+b101 A
+b101 K
 b10 4
 b101 @
 b100 ?
-b101 I
+b101 J
+b100 I
+b100 /
+b100 B
 b100 H
 b100001010000000000000010 &
 b100001010000000000000010 <
+b110 "
+b110 D
+b110 G
 b1100 '
 b1100 8
 b1100 =
@@ -194,27 +193,28 @@ b1000 >
 #5
 02
 #6
-b1000 "
-b1000 C
-b1000 F
 b111 #
-b111 B
-b111 E
+b111 C
+b111 F
 b11111111111111111111111111110000 /
-b11111111111111111111111111110000 G
+b11111111111111111111111111110000 B
+b11111111111111111111111111110000 H
 b11 (
 b11 6
-b11 D
-b110 !
-b110 A
-b110 J
+b11 E
+b111 !
+b111 A
+b111 K
 b11 4
 b111 @
 b110 ?
-b111 I
-b110 H
+b111 J
+b110 I
 b110001110000000000000011 &
 b110001110000000000000011 <
+b1000 "
+b1000 D
+b1000 G
 b10000 '
 b10000 8
 b10000 =
@@ -226,27 +226,28 @@ b1100 >
 #7
 02
 #8
-b1010 "
-b1010 C
-b1010 F
 b1001 #
-b1001 B
-b1001 E
-b1011 /
-b1011 G
+b1001 C
+b1001 F
 b100 (
 b100 6
-b100 D
-b1000 !
-b1000 A
-b1000 J
+b100 E
+b1001 !
+b1001 A
+b1001 K
 b100 4
 b1001 @
 b1000 ?
-b1001 I
-b1000 H
+b1001 J
+b1000 I
+b1011 /
+b1011 B
+b1011 H
 b1000010010000000000000100 &
 b1000010010000000000000100 <
+b1010 "
+b1010 D
+b1010 G
 b10100 '
 b10100 8
 b10100 =
@@ -258,27 +259,28 @@ b10000 >
 #9
 02
 #10
-b1100 "
-b1100 C
-b1100 F
 b1011 #
-b1011 B
-b1011 E
+b1011 C
+b1011 F
 b10111 /
-b10111 G
+b10111 B
+b10111 H
 b0 (
 b0 6
-b0 D
-b1010 !
-b1010 A
-b1010 J
+b0 E
+b1011 !
+b1011 A
+b1011 K
 b0 4
 b1011 @
 b1010 ?
-b1011 I
-b1010 H
+b1011 J
+b1010 I
 b1010010110000000000000000 &
 b1010010110000000000000000 <
+b1100 "
+b1100 D
+b1100 G
 b11000 '
 b11000 8
 b11000 =

@@ -24,7 +24,7 @@ begin
             ALUOP<=6'b111111;
             MemWrite<=1'b0;
             ALUSrc<=1'b0;
-            RegWrite<=1'b0;
+            RegWrite<=1'b1;
         end
     else
         begin

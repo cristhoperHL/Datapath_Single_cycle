@@ -52,7 +52,8 @@ regdst_mux_2_1 rgm2_1(.a(instruction[25:21]),.b(instruction[20:16]),.sel(RegDst)
 //EL RF falta mejorar 
 Register_file RF(.clk(clk),.read_reg1(instruction[25:21]),
 .read_reg2(instruction[20:16]),
-.write_reg(write_reg),.RegWrite(RegWrite),.read_data1(read_data1),
+.write_reg(write_reg),.write_data(ALU_result),
+.RegWrite(RegWrite),.read_data1(read_data1),
 .read_data2(read_data2));
 
 
@@ -63,6 +64,8 @@ ALU_control AC(.ALUOP(ALUOP),.func(instruction[5:0]),
 
 ALU alu(.read_data1(read_data1),.read_data2(read_data2),
 .alu_control_out(alu_control_out),.ALU_result(ALU_result));
+
+
 
 
 
