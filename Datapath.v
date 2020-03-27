@@ -5,6 +5,7 @@
 `include "Register_File.v"
 `include "regdst_mux_2_1.v"
 `include "ALU_control.v"
+`include "ALU.v"
 
 module datapath();
 
@@ -28,6 +29,9 @@ wire [31:0] read_data2;
 
 //signals ALU_CONTROL
 wire [5:0] alu_control_out;
+
+//signals ALU
+wire [31:0] ALU_result;
 
 
 //FETCH
@@ -57,6 +61,9 @@ ALU_control AC(.ALUOP(ALUOP),.func(instruction[5:0]),
 
 
 
+ALU alu(.read_data1(read_data1),.read_data2(read_data2),
+.alu_control_out(alu_control_out),.ALU_result(ALU_result));
+
 
 always
 begin
@@ -67,7 +74,7 @@ end
 initial begin
 	$dumpfile("func.vcd");
 	$dumpvars;
-	$monitor(" pc = %b,%b,%d,%d,%d,%d",pc,instruction,instruction[25:21],instruction[21:16],read_data1,read_data2);
+	$monitor(" pc = %b,%b,%d,%d,a=%b,b=%b,op=%d,result=%b",pc,instruction,instruction[25:21],instruction[21:16],read_data1,read_data2,alu_control_out,ALU_result);
 	reset<=1;
     clk<=1;
     #1;
