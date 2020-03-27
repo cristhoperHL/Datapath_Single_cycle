@@ -21,14 +21,14 @@ begin
             MemRead<=1'b0;
             MemRead<=1'b0;
             MemtoReg<=1'b0;
-            ALUOP<=instruction;
+            ALUOP<=6'b111111;
             MemWrite<=1'b0;
             ALUSrc<=1'b0;
             RegWrite<=1'b0;
         end
     else
         begin
-            if( instruction == 6'b000001 || instruction== 6'b000111 || instruction==6'b000100 || instruction==6'b001010 )//operaciones normales como addi, subi y operaciones logicas  
+            if( instruction == 6'b000110 || instruction== 6'b000111 || instruction==6'b001000 || instruction==6'b001001 )//operaciones normales como addi, subi y operaciones logicas  
                 begin 
                     RegDst<=1'b1;
                     jump<=1'b0;
