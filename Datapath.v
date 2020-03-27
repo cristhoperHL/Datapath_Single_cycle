@@ -65,6 +65,8 @@ ALU alu(.read_data1(read_data1),.read_data2(read_data2),
 .alu_control_out(alu_control_out),.ALU_result(ALU_result));
 
 
+
+
 always
 begin
     #1clk=~clk;
