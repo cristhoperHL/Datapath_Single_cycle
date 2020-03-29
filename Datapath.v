@@ -9,6 +9,10 @@
 `include "Sign_Extend.v"
 `include "alu_mux_2_1.v"
 `include "Branch_and.v"
+`include "Shift_left_2.v"
+`include "Adder_branch.v"
+`include "mux_branch_2_1.v"
+
 
 module datapath();
 
@@ -39,18 +43,28 @@ wire [31:0] sign_extend_out;
 //Signals del mux antes del alu
 wire [31:0] data_2_out;
 
+//signals shift left 2 del branch 
+wire [31:0] shift_branch_out;
+
+//signals adder branch
+wire [31:0] adder_branch_result;
+
 //signals ALU
 wire [31:0] ALU_result;
 wire zero;
 
-
 //signals del and del Branch.
-
 wire out_and;
 
 
+//signal mux_branch
+wire [31:0] mux_branch_out;
+
+
+
+
 //FETCH
-Program_Counter PC(.clk(clk),.reset(reset),.d(d),.q(pc));
+Program_Counter PC(.clk(clk),.reset(reset),.d(mux_branch_out),.q(pc));
 Instruction_Memory IM(.pc(pc),.out(instruction));
 Add_pc APC(.pc(pc),.pc_end(d));
 	
@@ -82,7 +96,12 @@ alu_mux_2_1 alu_mux(.a(read_data2),.b(sign_extend_out),.sel(ALUSrc),
 .y(data_2_out));
 
 
+Shift_left_2 SL2(.inmediate(sign_extend_out),.out(shift_branch_out));
+
+
 //EXECUTE
+
+Adder_branch add_b(.a(d),.b(shift_branch_out),.out(adder_branch_result));
 
 ALU alu(.read_data1(read_data1),.read_data2(data_2_out),
 .alu_control_out(alu_control_out),.zero(zero),.ALU_result(ALU_result));
@@ -90,6 +109,10 @@ ALU alu(.read_data1(read_data1),.read_data2(data_2_out),
 
 //AND del Branch
 Branch_and Br_a(.a(zero),.b(Branch),.out(out_and));
+
+
+mux_branch m_branch(.a(adder_branch_result),.b(d),.sel(out_and),.out(mux_branch_out));
+
 
 
 always
