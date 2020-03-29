@@ -12,6 +12,9 @@
 `include "Shift_left_2.v"
 `include "Adder_branch.v"
 `include "mux_branch_2_1.v"
+`include "Jump_shift_left.v"
+`include "mux_jump.v"
+
 
 
 module datapath();
@@ -57,13 +60,20 @@ wire zero;
 //signals del and del Branch.
 wire out_and;
 
-
 //signal mux_branch
 wire [31:0] mux_branch_out;
 
+//signal out del shift left 2 de jump
+wire [31:0] jump_sl_out;
 
+//signal mux final jump
+wire [31:0] mux_pc_end;
+
+
+
+////////////////////////////////////////////////////////////////////////
 //FETCH
-Program_Counter PC(.clk(clk),.reset(reset),.d(mux_branch_out),.q(pc));
+Program_Counter PC(.clk(clk),.reset(reset),.d(mux_pc_end),.q(pc));
 Instruction_Memory IM(.pc(pc),.out(instruction));
 Add_pc APC(.pc(pc),.pc_end(d));
 	
@@ -73,6 +83,9 @@ Control_Unit CU(.instruction(instruction[31:26]),.RegDst(RegDst),.jump(jump),
 .Branch(Branch),.MemRead(MemRead),.MemtoReg(MemtoReg),.ALUOP(ALUOP),
 .MemWrite(MemWrite),.ALUSrc(ALUSrc),.RegWrite(RegWrite));
 
+
+//shift_left_jump
+Jump_sl j_sl(.inst_jump(instruction[25:0]),.pc_4(d),.out(jump_sl_out));
 
 regdst_mux_2_1 rgm2_1(.a(instruction[20:16]),.b(instruction[15:11]),.sel(RegDst),
 .y(write_reg));
@@ -109,8 +122,13 @@ ALU alu(.read_data1(read_data1),.read_data2(data_2_out),
 //AND del Branch
 Branch_and Br_a(.a(zero),.b(Branch),.out(out_and));
 
-
 mux_branch m_branch(.a(adder_branch_result),.b(d),.sel(out_and),.out(mux_branch_out));
+
+
+//mux del jump y branch
+
+mux_j jump_branch(.a(jump_sl_out),.b(mux_branch_out),.sel(jump),.out(mux_pc_end));
+
 
 
 

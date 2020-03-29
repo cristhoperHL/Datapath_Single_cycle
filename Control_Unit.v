@@ -54,7 +54,20 @@ begin
                     ALUSrc<=2'b10;
                     RegWrite<=1'b0;            
                 end
-            
+            else if (instruction == 6'b010101 || instruction == 6'b010110 || instruction == 6'b010111)//J,JR,JAL            
+                begin
+                    RegDst<=1'b1;
+                    jump<=1'b1;
+                    Branch<=1'b0;
+                    MemRead<=1'b0;
+                    MemRead<=1'b0;
+                    MemtoReg<=1'b0;
+                    ALUOP<=instruction;
+                    MemWrite<=1'b0;
+                    ALUSrc<=2'b00;
+                    RegWrite<=1'b0; 
+                end
+        
         //FALTA IMPLEMENTAR LOS ACCESOS DE MEMORIA SEAN LECTURA Y ESCRITURA.
 
         end
