@@ -6,6 +6,8 @@
 `include "regdst_mux_2_1.v"
 `include "ALU_control.v"
 `include "ALU.v"
+`include "Sign_Extend.v"
+`include "alu_mux_2_1.v"
 
 module datapath();
 
@@ -30,8 +32,16 @@ wire [31:0] read_data2;
 //signals ALU_CONTROL
 wire [5:0] alu_control_out;
 
+//signals Sign Extend
+wire [31:0] sign_extend_out;
+
+//Signals del mux antes del alu
+
+wire [31:0] data_2_out;
 //signals ALU
 wire [31:0] ALU_result;
+
+
 
 
 //FETCH
@@ -49,7 +59,7 @@ Control_Unit CU(.instruction(instruction[31:26]),.RegDst(RegDst),.jump(jump),
 regdst_mux_2_1 rgm2_1(.a(instruction[20:16]),.b(instruction[15:11]),.sel(RegDst),
 .y(write_reg));
 
-//EL RF falta mejorar 
+ 
 Register_file RF(.clk(clk),.read_reg1(instruction[25:21]),
 .read_reg2(instruction[20:16]),
 .write_reg(write_reg),.write_data(ALU_result),
@@ -60,9 +70,16 @@ Register_file RF(.clk(clk),.read_reg1(instruction[25:21]),
 ALU_control AC(.ALUOP(ALUOP),.func(instruction[5:0]),
 .alu_control_out(alu_control_out));
 
+Sign_Extend SE(.instruction_in(instruction[15:0]),
+.instruction_out(sign_extend_out));
+
+alu_mux_2_1 alu_mux(.a(read_data2),.b(sign_extend_out),.sel(ALUSrc),
+.y(data_2_out));
 
 
-ALU alu(.read_data1(read_data1),.read_data2(read_data2),
+//EXECUTE
+
+ALU alu(.read_data1(read_data1),.read_data2(data_2_out),
 .alu_control_out(alu_control_out),.ALU_result(ALU_result));
 
 
@@ -79,12 +96,12 @@ end
 initial begin
 	$dumpfile("func.vcd");
 	$dumpvars;
-	$monitor(" pc = %b,%b,%d,%d,a=%b,b=%b,op=%d,result=%b,%b,%d",pc,instruction,instruction[25:21],instruction[21:16],read_data1,read_data2,alu_control_out,ALU_result,write_reg,RegDst);
+	$monitor(" pc = %d,%b,%d,%d,a=%b,b=%b,op=%d,result=%b,%d",pc,instruction,instruction[25:21],instruction[20:16],read_data1,data_2_out,alu_control_out,ALU_result,write_reg);
 	reset<=1;
     clk<=1;
     #1;
     reset<=0;
-	#10;$finish;
+	#20;$finish;
 
 end
 

@@ -26,6 +26,46 @@ begin
         begin
             ALU_result = read_data1 | read_data2;        
         end
+    else if(alu_control_out == 6'b000101)//SLT
+        begin 
+            if(read_data1 < read_data2)
+                begin 
+                    ALU_result = 1;
+                end 
+            else
+                begin
+                    ALU_result = 0;
+                end                
+        end//desde aca vienen los inmediatos  
+    else if(alu_control_out == 6'b000110)//ADDI
+        begin
+            ALU_result = read_data1 + read_data2;
+        end
+    else if(alu_control_out==6'b000111)//ANDI
+        begin 
+            ALU_result = read_data1 & read_data2;
+        end  
+    else if(alu_control_out==6'b001000)//SUBI
+        begin 
+            ALU_result = read_data1 - read_data2;
+        end 
+    else if(alu_control_out==6'b001001)//ORI
+        begin 
+            ALU_result = read_data1 | read_data2;
+        end 
+    else if(alu_control_out==6'b001101)//SLTI
+        begin 
+            if(read_data1 < read_data2)
+                begin 
+                    ALU_result = 1;
+                end 
+            else
+                begin
+                    ALU_result = 0;
+                end                
+        end
+    
+    
 end
 
 endmodule
