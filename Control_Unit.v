@@ -8,7 +8,7 @@ output reg  MemRead;
 output reg  MemtoReg;
 output reg  [5:0] ALUOP;
 output reg MemWrite;
-output reg ALUSrc;
+output reg [1:0] ALUSrc;
 output reg RegWrite;
 
 always@(instruction)
@@ -23,7 +23,7 @@ begin
             MemtoReg<=1'b0;
             ALUOP<=6'b111111;
             MemWrite<=1'b0;
-            ALUSrc<=1'b0;
+            ALUSrc<=2'b00;
             RegWrite<=1'b1;
         end
     else
@@ -38,7 +38,7 @@ begin
                     MemtoReg<=1'b0;
                     ALUOP<=instruction;
                     MemWrite<=1'b0;
-                    ALUSrc<=1'b1;
+                    ALUSrc<=2'b01;
                     RegWrite<=1'b1;
                 end  
             else if( instruction == 6'b001010 || instruction== 6'b001011 || instruction==6'b001100 )//BEQ,BNEQ,BGEZ.
@@ -51,7 +51,7 @@ begin
                     MemtoReg<=1'b0;
                     ALUOP<=instruction;
                     MemWrite<=1'b0;
-                    ALUSrc<=1'b1;
+                    ALUSrc<=2'b10;
                     RegWrite<=1'b0;            
                 end
             

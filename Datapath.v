@@ -26,7 +26,8 @@ wire [31:0] pc;
 wire [31:0] instruction;
 
 //Signals(Control Unit)
-wire RegDst,jump,Branch,MemRead,MemtoReg,MemWrite,ALUSrc,RegWrite;
+wire RegDst,jump,Branch,MemRead,MemtoReg,MemWrite,RegWrite;
+wire [1:0] ALUSrc;
 wire [5:0] ALUOP;
 
 //Signals Register File
@@ -59,8 +60,6 @@ wire out_and;
 
 //signal mux_branch
 wire [31:0] mux_branch_out;
-
-
 
 
 //FETCH
@@ -124,7 +123,7 @@ end
 initial begin
 	$dumpfile("func.vcd");
 	$dumpvars;
-	$monitor(" pc = %d,%b,%d,%d,a=%b,b=%b,op=%d,result=%b,%d",pc,instruction,instruction[25:21],instruction[20:16],read_data1,data_2_out,alu_control_out,ALU_result,write_reg);
+	$monitor(" pc = %d,%b,%d,%d,a=%b,b=%b,op=%d,result=%b,%d",pc,instruction,instruction[25:21],instruction[20:16],read_data1,data_2_out,alu_control_out,ALU_result,ALUSrc);
 	reset<=1;
     clk<=1;
     #1;
