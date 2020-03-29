@@ -12,15 +12,15 @@ R-type : para el func
 
 I-type : 
 
-    addi : 000110 -
-    andi : 000111 -
-    subi : 001000 -
-    ori  : 001001 -
-    slti : 001101 -
+    addi : 000110 *
+    andi : 000111 *
+    subi : 001000 *
+    ori  : 001001 *
+    slti : 001101 *
     
-    beq  : 001010
-    bneq : 001011
-    bgez : 001100
+    beq  : 001010 -
+    bneq : 001011 -
+    bgez : 001100 -
 
     lh   : 001110
     lw   : 001111

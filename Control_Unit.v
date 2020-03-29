@@ -41,7 +41,7 @@ begin
                     ALUSrc<=1'b1;
                     RegWrite<=1'b1;
                 end  
-            else if( instruction == 6'b000011 || instruction== 6'b000110 || instruction==6'b001001 )//operaciones de branch
+            else if( instruction == 6'b001010 || instruction== 6'b001011 || instruction==6'b001100 )//BEQ,BNEQ,BGEZ.
                 begin
                     RegDst<=1'b1;
                     jump<=1'b0;
@@ -52,7 +52,7 @@ begin
                     ALUOP<=instruction;
                     MemWrite<=1'b0;
                     ALUSrc<=1'b1;
-                    RegWrite<=1'b1;            
+                    RegWrite<=1'b0;            
                 end
             
         //FALTA IMPLEMENTAR LOS ACCESOS DE MEMORIA SEAN LECTURA Y ESCRITURA.

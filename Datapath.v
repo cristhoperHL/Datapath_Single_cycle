@@ -8,6 +8,7 @@
 `include "ALU.v"
 `include "Sign_Extend.v"
 `include "alu_mux_2_1.v"
+`include "Branch_and.v"
 
 module datapath();
 
@@ -36,12 +37,16 @@ wire [5:0] alu_control_out;
 wire [31:0] sign_extend_out;
 
 //Signals del mux antes del alu
-
 wire [31:0] data_2_out;
+
 //signals ALU
 wire [31:0] ALU_result;
+wire zero;
 
 
+//signals del and del Branch.
+
+wire out_and;
 
 
 //FETCH
@@ -80,11 +85,11 @@ alu_mux_2_1 alu_mux(.a(read_data2),.b(sign_extend_out),.sel(ALUSrc),
 //EXECUTE
 
 ALU alu(.read_data1(read_data1),.read_data2(data_2_out),
-.alu_control_out(alu_control_out),.ALU_result(ALU_result));
+.alu_control_out(alu_control_out),.zero(zero),.ALU_result(ALU_result));
 
 
-
-
+//AND del Branch
+Branch_and Br_a(.a(zero),.b(Branch),.out(out_and));
 
 
 always
