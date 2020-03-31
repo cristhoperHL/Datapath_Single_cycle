@@ -1,6 +1,6 @@
 ISA: 
 
-R-type : para el func
+R-type : 
 
     add : 000000 *
     sub : 000001 *
