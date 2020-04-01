@@ -14,6 +14,8 @@
 `include "mux_branch_2_1.v"
 `include "Jump_shift_left.v"
 `include "mux_jump.v"
+`include "Data_memory.v"
+`include "mux_writeback.v"
 
 
 
@@ -70,6 +72,12 @@ wire [31:0] jump_sl_out;
 //signal mux final jump
 wire [31:0] mux_pc_end;
 
+//signal MEMORY
+wire [31:0] memory_out;
+
+//signal MUX Writeback
+wire [31:0] mux_end_cycle;
+
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -94,7 +102,7 @@ regdst_mux_2_1 rgm2_1(.a(instruction[20:16]),.b(instruction[15:11]),.sel(RegDst)
  
 Register_file RF(.clk(clk),.read_reg1(instruction[25:21]),
 .read_reg2(instruction[20:16]),
-.write_reg(write_reg),.write_data(ALU_result),
+.write_reg(write_reg),.write_data(mux_end_cycle),
 .RegWrite(RegWrite),.read_data1(read_data1),
 .read_data2(read_data2));
 
@@ -124,6 +132,18 @@ ALU alu(.read_data1(read_data1),.read_data2(data_2_out),
 Branch_and Br_a(.a(zero),.b(Branch),.out(out_and));
 
 mux_branch m_branch(.a(adder_branch_result),.b(d),.sel(out_and),.out(mux_branch_out));
+
+
+//MEMORY 
+
+Data_memory DM(.address(ALU_result),.write_data(read_data2),
+.Memwrite(MemWrite),.Memread(MemRead),.read_data(memory_out));
+
+//WRITEBACK
+
+mux_w MW(.a(memory_out),.b(ALU_result),.sel(MemtoReg),
+.out(mux_end_cycle));
+
 
 
 //mux del jump y branch
