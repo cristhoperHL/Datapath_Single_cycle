@@ -111,7 +111,7 @@ begin
                     ALUSrc<=2'b00;
                     RegWrite<=1'b0; 
                 end
-            else if (instruction == 6'b010000 || instruction == 6'b010001 || instruction == 6'b010010)//SB,SH,SW         
+            else if (instruction == 6'b010000)//SB         
                 begin
                     RegDst<=1'b1;
                     jump<=1'b1;
@@ -119,11 +119,34 @@ begin
                     MemRead<=2'b00;
                     MemtoReg<=1'b0;
                     ALUOP<=instruction;
-                    MemWrite<=2'b11;
+                    MemWrite<=2'b01;
                     ALUSrc<=2'b00;
                     RegWrite<=1'b0; 
                 end
-
+            else if (instruction == 6'b010001)//SH        
+                begin
+                    RegDst<=1'b1;
+                    jump<=1'b1;
+                    Branch<=1'b0;
+                    MemRead<=2'b00;
+                    MemtoReg<=1'b0;
+                    ALUOP<=instruction;
+                    MemWrite<=2'b10;
+                    ALUSrc<=2'b00;
+                    RegWrite<=1'b0; 
+                end
+            else if (instruction == 6'b010010)//SW         
+                begin
+                    RegDst<=1'b1;
+                    jump<=1'b1;
+                    Branch<=1'b0;
+                    MemRead<=2'b00;
+                    MemtoReg<=1'b0;
+                    ALUOP<=instruction;
+                    MemWrite<=2'b01;
+                    ALUSrc<=2'b11;
+                    RegWrite<=1'b0; 
+                end
         end
 end
 
