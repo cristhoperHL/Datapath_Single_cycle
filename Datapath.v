@@ -29,7 +29,8 @@ wire [31:0] pc;
 wire [31:0] instruction;
 
 //Signals(Control Unit)
-wire RegDst,jump,Branch,MemRead,MemtoReg,MemWrite,RegWrite;
+wire RegDst,jump,Branch,MemtoReg,RegWrite;
+wire [1:0] MemRead,MemWrite;
 wire [1:0] ALUSrc;
 wire [5:0] ALUOP;
 

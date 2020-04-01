@@ -120,6 +120,11 @@ begin
                     ALU_result = 0;
                 end
         end
+    else if(alu_control_out==6'b001110 || alu_control_out==6'b001111)//LH,LW
+        begin
+            zero=1'b0;
+            ALU_result=read_data1+read_data2;
+        end
     
 end
 

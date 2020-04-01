@@ -4,10 +4,10 @@ input [5:0] instruction;
 output reg RegDst;//falta probar 
 output reg  jump;
 output reg  Branch;
-output reg  MemRead;
+output reg  [1:0] MemRead;
 output reg  MemtoReg;
 output reg  [5:0] ALUOP;
-output reg MemWrite;
+output reg [1:0] MemWrite;
 output reg [1:0] ALUSrc;
 output reg RegWrite;
 
@@ -18,11 +18,10 @@ begin
             RegDst<=1'b0;
             jump<=1'b0;
             Branch<=1'b0;
-            MemRead<=1'b0;
-            MemRead<=1'b0;
+            MemRead<=2'b00;
             MemtoReg<=1'b0;
             ALUOP<=6'b111111;
-            MemWrite<=1'b0;
+            MemWrite<=2'b00;
             ALUSrc<=2'b00;
             RegWrite<=1'b1;
         end
@@ -33,11 +32,10 @@ begin
                     RegDst<=1'b1;
                     jump<=1'b0;
                     Branch<=1'b0;
-                    MemRead<=1'b0;
-                    MemRead<=1'b0;
+                    MemRead<=2'b00;
                     MemtoReg<=1'b0;
                     ALUOP<=instruction;
-                    MemWrite<=1'b0;
+                    MemWrite<=2'b00;
                     ALUSrc<=2'b01;
                     RegWrite<=1'b1;
                 end  
@@ -46,11 +44,10 @@ begin
                     RegDst<=1'b1;
                     jump<=1'b0;
                     Branch<=1'b1;
-                    MemRead<=1'b0;
-                    MemRead<=1'b0;
+                    MemRead<=2'b00;
                     MemtoReg<=1'b0;
                     ALUOP<=instruction;
-                    MemWrite<=1'b0;
+                    MemWrite<=2'b00;
                     ALUSrc<=2'b10;
                     RegWrite<=1'b0;            
                 end
@@ -59,19 +56,75 @@ begin
                     RegDst<=1'b1;
                     jump<=1'b1;
                     Branch<=1'b0;
-                    MemRead<=1'b0;
-                    MemRead<=1'b0;
+                    MemRead<=2'b00;
                     MemtoReg<=1'b0;
                     ALUOP<=instruction;
-                    MemWrite<=1'b0;
+                    MemWrite<=2'b00;
                     ALUSrc<=2'b00;
                     RegWrite<=1'b0; 
                 end
-        
-        //FALTA IMPLEMENTAR LOS ACCESOS DE MEMORIA SEAN LECTURA Y ESCRITURA.
+            else if (instruction == 6'b001110)//LH           
+                begin
+                    RegDst<=1'b1;
+                    jump<=1'b1;
+                    Branch<=1'b0;
+                    MemRead<=2'b00;
+                    MemtoReg<=1'b1;
+                    ALUOP<=instruction;
+                    MemWrite<=2'b00;
+                    ALUSrc<=2'b00;
+                    RegWrite<=1'b0; 
+                end
+            else if (instruction == 6'b001111)//LW          
+                begin
+                    RegDst<=1'b1;
+                    jump<=1'b1;
+                    Branch<=1'b0;
+                    MemRead<=2'b01;
+                    MemtoReg<=1'b1;
+                    ALUOP<=instruction;
+                    MemWrite<=2'b00;
+                    ALUSrc<=2'b00;
+                    RegWrite<=1'b0; 
+                end
+            else if (instruction == 6'b010011)//LUI        
+                begin
+                    RegDst<=1'b1;
+                    jump<=1'b1;
+                    Branch<=1'b0;
+                    MemRead<=2'b10;
+                    MemtoReg<=1'b1;
+                    ALUOP<=instruction;
+                    MemWrite<=2'b00;
+                    ALUSrc<=2'b00;
+                    RegWrite<=1'b0; 
+                end
+            else if (instruction == 6'b010100)//LB           
+                begin
+                    RegDst<=1'b1;
+                    jump<=1'b1;
+                    Branch<=1'b0;
+                    MemRead<=2'b11;
+                    MemtoReg<=1'b1;
+                    ALUOP<=instruction;
+                    MemWrite<=2'b00;
+                    ALUSrc<=2'b00;
+                    RegWrite<=1'b0; 
+                end
+            else if (instruction == 6'b010000 || instruction == 6'b010001 || instruction == 6'b010010)//SB,SH,SW         
+                begin
+                    RegDst<=1'b1;
+                    jump<=1'b1;
+                    Branch<=1'b0;
+                    MemRead<=2'b00;
+                    MemtoReg<=1'b0;
+                    ALUOP<=instruction;
+                    MemWrite<=2'b11;
+                    ALUSrc<=2'b00;
+                    RegWrite<=1'b0; 
+                end
 
         end
-        //FALTA IMPLEMENTAR LOS JUMPS 
 end
 
 
