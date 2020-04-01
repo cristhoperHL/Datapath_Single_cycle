@@ -68,7 +68,7 @@ begin
                     RegDst<=1'b1;
                     jump<=1'b1;
                     Branch<=1'b0;
-                    MemRead<=2'b00;
+                    MemRead<=2'b01;
                     MemtoReg<=1'b1;
                     ALUOP<=instruction;
                     MemWrite<=2'b00;
@@ -80,7 +80,7 @@ begin
                     RegDst<=1'b1;
                     jump<=1'b1;
                     Branch<=1'b0;
-                    MemRead<=2'b01;
+                    MemRead<=2'b10;
                     MemtoReg<=1'b1;
                     ALUOP<=instruction;
                     MemWrite<=2'b00;
@@ -92,7 +92,7 @@ begin
                     RegDst<=1'b1;
                     jump<=1'b1;
                     Branch<=1'b0;
-                    MemRead<=2'b10;
+                    MemRead<=2'b00;
                     MemtoReg<=1'b1;
                     ALUOP<=instruction;
                     MemWrite<=2'b00;

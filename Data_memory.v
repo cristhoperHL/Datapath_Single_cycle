@@ -14,24 +14,20 @@ end
 always@(address,write_data,Memwrite,Memread)
 begin
 
-if (Memread==2'b00) //LH
+if (Memread==2'b01) //LH
     begin
     //read_data = {memoria[address]};
     end
-else if(Memread==2'b01)//LW
+else if(Memread==2'b10)//LW
     begin
     read_data = {memoria[address],memoria[address+1],memoria[address+2],memoria[address+3]}; 
     end
-else if(Memread==2'b10)// LUI   
-    begin
-
-    end
 else if(Memread==2'b11)//LB 
     begin//se escoje el primer byte mas a la izquierda y luego se extiende dependiendo del BSM 
-
     read_data = {{24{address[7]}},memoria[address]};
-
     end
+    //FALTAN LAS INSTRUCCIONES STORE
+
 end
 
 endmodule 
