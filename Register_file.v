@@ -1,6 +1,5 @@
 module Register_file(clk,read_reg1,read_reg2,write_reg,write_data,RegWrite,read_data1,read_data2);
 
-//NOTA : Falta la entrada write reg que viene de memory.
 
 input clk;
 input [4:0] read_reg1,read_reg2;

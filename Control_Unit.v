@@ -25,6 +25,18 @@ begin
             ALUSrc<=2'b00;
             RegWrite<=1'b1;
         end
+    else if(instruction == 6'b100000)
+        begin
+            RegDst<=1'b0;
+            jump<=1'b0;
+            Branch<=1'b0;
+            MemRead<=2'b00;
+            MemtoReg<=1'b0;
+            ALUOP<=6'b100000;
+            MemWrite<=2'b00;
+            ALUSrc<=2'b00;
+            RegWrite<=1'b0;
+        end    
     else
         begin
             if( instruction == 6'b000110 || instruction== 6'b000111 || instruction==6'b001000 || instruction==6'b001001 || instruction==6'b001101 )//ADDI,ANDI,SUBI,ORI,SLTI  

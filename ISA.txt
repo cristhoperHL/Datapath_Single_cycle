@@ -1,7 +1,7 @@
 ISA: 
 
 R-type : 
-
+    para el registro func:
     add : 000000 *
     sub : 000001 *
     and : 000010 *
@@ -11,7 +11,7 @@ R-type :
 
 
 I-type : 
-
+    para el registro op:
     addi : 000110 *
     andi : 000111 *
     subi : 001000 *
@@ -32,7 +32,20 @@ I-type :
 
 
 J-type :
-
+    para el registro op:
     j   : 010101 *
     jr  : 010110 *
     jal : 010111 *
+
+
+F-TYPE : Format IEEE 754
+    para el registro cop:
+
+    Single-precision : 10000
+
+
+
+    Double-precision : 10001
+
+
+
